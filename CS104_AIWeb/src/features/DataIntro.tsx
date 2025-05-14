@@ -191,9 +191,65 @@ export default function DataIntro() {
                 {
                     title: "Preprocessing",
                     content: (
-                        <Typography variant="body1">
-                            Hello, my name is <strong>Nguyen</strong>.
-                        </Typography>
+                        <>
+                            <Typography variant="body1" paragraph>
+                                There are two categorical columns in the
+                                dataset: <strong>items</strong> and{" "}
+                                <strong>countries</strong>. Categorical
+                                variables contain label values (e.g., names or
+                                codes) rather than numeric values, and their
+                                possible values are typically limited to a fixed
+                                set. In this case, the values represent specific
+                                items and countries.
+                            </Typography>
+                            <Typography variant="body1" paragraph>
+                                <strong>Mean Target Encoding</strong> is a
+                                technique used to convert these categorical
+                                variables into numerical values by replacing
+                                each category with the mean of the target
+                                variable corresponding to that category.
+                            </Typography>
+                            <Typography variant="body1" paragraph>
+                                <strong>Normalization/Standardization</strong>{" "}
+                                is a separate preprocessing step applied to the
+                                (now fully numeric) feature set to ensure that
+                                different features are on comparable scales—this
+                                is important for some models but not others:
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                component="div"
+                                sx={{ ml: 2 }}
+                            >
+                                <ul>
+                                    <li>
+                                        <strong>Decision Tree:</strong> No
+                                        scaling required, since tree-based
+                                        models are scale-invariant (they split
+                                        on thresholds, not distances or
+                                        gradients).
+                                    </li>
+                                    <li>
+                                        <strong>Lasso Regression:</strong> Only
+                                        the input features <code>X</code> are
+                                        standardized (zero mean, unit variance).
+                                        This is necessary because Lasso’s L1
+                                        penalty is sensitive to feature scale.
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            Artificial Neural Network (ANN):
+                                        </strong>{" "}
+                                        Both <code>X</code> and <code>y</code>{" "}
+                                        are standardized, because neural
+                                        networks use gradient-based optimization
+                                        and converge faster and more stably when
+                                        features (and targets, for regression)
+                                        share a common scale.
+                                    </li>
+                                </ul>
+                            </Typography>
+                        </>
                     ),
                 },
             ].map((section, index) => (
